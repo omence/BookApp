@@ -44,7 +44,7 @@ let fetchData = (input =>{
   let titleUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}:intitle=${query}`;
   let authorUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}:inauthor=${query}`;
   let URL = '';
-  console.log('ourURLs', titleUrl, authorUrl)
+  console.log('ourURLs', titleUrl, authorUrl);
   if (searchType === 'author'){
     URL = authorUrl;
   } else if (searchType = 'title'){
@@ -69,26 +69,7 @@ function Book(data) {
   this.title = data.volumeInfo.title;
 }
 
-
-
-
-
-
-
 app.get('../views/pages/searches/show');
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(PORT, () => {
     console.log(`listening on ${PORT}`);
