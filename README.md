@@ -14,6 +14,6 @@ Estimate of time needed to complete: ____1.5 hr_
 
 Start time: _10am____
 
-Finish time: _____
+Finish time: 10:30
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1/2 hour

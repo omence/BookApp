@@ -19,11 +19,12 @@ app.set('view engine', 'ejs');
 // client.on('error', error => console.log(error));
 // client.connect();
 
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
 app.post('/search', (request, response) => {
-
+  console.log('my request: ', request.body);
+  response.sendfile('../views/pages/seaches/show.ejs', {root: './public'});
 });
 
 app.get ('/', (request, response) => {
