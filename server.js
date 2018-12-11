@@ -14,57 +14,62 @@ app.use(cors());
 const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
-function Book(data) {
-this.selfLink = data.selfLink;
-this.title = data.volumeInfo.title;
-this.authors = data.volumeInfo.authors;
-};
-
 
 //const client = new pg.Client(process.env.DATABASE_URL);
 // client.on('error', error => console.log(error));
 // client.connect();
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
-app.post('/search', (request, response) => {
-  console.log('my request: ', request.body);
-  let answers = request.body;
-  console.log(answers);
-  Book.fetch(answers);
-  // response.sendfile('../views/pages/seaches/show.ejs', {root: './public'});
+
+app.get('/', (req, res) => {
+  res.render('../views/pages/index');
 });
 
-Book.fetch = function(input) {
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${input.title},${input.author}`;
- 
-  return superagent.get(url).then(result => {
-    const bookSum = result.body.items.map(data => {
-      const newBook = new Book(data);
+
+app.post('/search', getResults);
+
+function getResults(request, response) {
+  console.log('my request body:', request.body);
+  response.sendfile('../views/pages/searches/show', {root: './public'});
+  let input = request.body;
+  fetchData(input);
+}
+let fetchData = (input =>{
+  console.log('fetch is running');
+  let query = input.bookSearch;
+  let searchType = input.search;
+  console.log( 'query and searchType', query, searchType);
+
+  let titleUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}:intitle=${query}`;
+  let authorUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}:inauthor=${query}`;
+  let URL = '';
+  console.log('ourURLs', titleUrl, authorUrl);
+  if (searchType === 'author'){
+    URL = authorUrl;
+  } else if (searchType = 'title'){
+    URL = titleUrl;
+  }
+  console.log('ifElse ran');
+
+  return superagent.get(URL).then(result => {
+    console.log('running');
+    const allBooks = result.body.items.map(info => {
+      const newBook = new Book(info);
       console.log('newBook', newBook);
-      return newBook;
+    });
+    console.log('allBooks', allBooks);
+    return allBooks;
+  });
+});
 
-});
-    return bookSum;
-});
+function Book(data) {
+  this.selfLink = data.selfLink;
+  this.author = data.volumeInfo.authors;
+  this.title = data.volumeInfo.title;
 }
 
-
-
-app.get ('/', (request, response) => {
-  response.render('../views/pages/index');
-});
-
-
-
-
-
-
-
-
-
-
+app.get('../views/pages/searches/show');
 
 app.listen(PORT, () => {
     console.log(`listening on ${PORT}`);
