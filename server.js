@@ -31,9 +31,10 @@ app.post('/search', getResults);
 
 function getResults(request, response) {
   console.log('my request body:', request.body);
-  response.sendfile('../views/pages/searches/show', {root: './public'});
+  // response.sendfile('../views/pages/searches/show', {root: './public'});
   let input = request.body;
-  fetchData(input);
+  fetchData(input)
+    .then(result => response.send(result));
 }
 let fetchData = (input =>{
   console.log('fetch is running');
@@ -57,8 +58,11 @@ let fetchData = (input =>{
     const allBooks = result.body.items.map(info => {
       const newBook = new Book(info);
       console.log('newBook', newBook);
+      return newBook;
     });
     console.log('allBooks', allBooks);
+    // renderBooks(allBooks);
+    
     return allBooks;
   });
 });
@@ -69,6 +73,14 @@ function Book(data) {
   this.title = data.volumeInfo.title;
 }
 
+// app.get('/seach', (request, response)=>{
+//   response.render('show', {newBook: })
+// })
+
+// function renderBooks(books){
+//   console.log('renderBooks');
+//   response.render('show', {newBook: books,});
+// };
 app.get('../views/pages/searches/show');
 
 app.listen(PORT, () => {
