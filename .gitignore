@@ -223,5 +223,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+.env
 
 # End of https://www.gitignore.io/api/node,macos,linux,windows,webstorm,visualstudiocode

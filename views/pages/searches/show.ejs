@@ -4,22 +4,21 @@
 
   <title>Search</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/Styles/base.css" />
 </head>
 <body>
-  <header><h2>Search</h2></header>
+  <head><h2>Search</h2></head>
   <main>
-    <ul>
-      <% newBook.foreach(item => { %>
-        <li>
-          <p>
-            <a href = <% item.selfLink %>> <% item.title %> </a>
-          </p>
-          <p>
-            <% item.author %>
-          </p>
-        </li>
-      <%})%>  
-    </ul>
+    <section>
+        <% renderedBooks.forEach( item => { %>
+          <section>
+            <img src="<%= item.img_url %>">
+            <p><%= item.title %></p>
+            <p><%= item.author %></p>
+            <p><%= item.description %></p>
+          </section>
+        <% }) %>
+    </section>
   </main>
   
 </body>
