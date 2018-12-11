@@ -11,15 +11,15 @@
     <header><h1>
       Book App
     </h1></header>
-    <form action="/books" method="post">
+    <form action="/search" method="post">
       <label>Book Search: <input type="text" name="bookSearch" /> </label>
       <label>
         Search by Author:
-        <input type="radio" name="search by" value="bookSearch" />
+        <input type="radio" name="search" value="author" />
       </label>
       <label>
         Search by Title:
-        <input type="radio" name="search by" value="bookSearch" />
+        <input type="radio" name="search" value="title" />
       </label>
       <button>Submit</button>
     </form>

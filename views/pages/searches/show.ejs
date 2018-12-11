@@ -7,6 +7,20 @@
 </head>
 <body>
   <header><h2>Search</h2></header>
+  <main>
+    <ul>
+      <% newBook.foreach(item => { %>
+        <li>
+          <p>
+            <a href = <% item.selfLink %>> <% item.title %> </a>
+          </p>
+          <p>
+            <% item.author %>
+          </p>
+        </li>
+      <%})%>  
+    </ul>
+  </main>
   
 </body>
 </html>
