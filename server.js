@@ -12,14 +12,15 @@ const app = express();
 app.use(cors());
 
 const PORT = process.env.PORT || 3000;
-app.set('view engine', 'ejs');
 
 
-//const client = new pg.Client(process.env.DATABASE_URL);
-// client.on('error', error => console.log(error));
+// const client = new pg.Client(process.env.DATABASE_URL);
+// client.on('error', error => console.error(error));
 // client.connect();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
+app.set('view engine', 'ejs');
 
 
 app.get('/', (req, res) => {
@@ -27,14 +28,18 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/search', getResults);
+app.post('/show', getResults);
 
 function getResults(request, response) {
   console.log('my request body:', request.body);
   // response.sendfile('../views/pages/searches/show', {root: './public'});
   let input = request.body;
   fetchData(input)
-    .then(result => response.send(result));
+    .then(result => {
+      console.log(result);
+      response.render('pages/searches/show', {renderedBooks: result,})
+    });
+
 }
 let fetchData = (input =>{
   console.log('fetch is running');
@@ -62,7 +67,8 @@ let fetchData = (input =>{
     });
     console.log('allBooks', allBooks);
     // renderBooks(allBooks);
-    
+    // console.log(response);
+    // response.render('show', {newBook, allBooks,});
     return allBooks;
   });
 });
@@ -71,6 +77,8 @@ function Book(data) {
   this.selfLink = data.selfLink;
   this.author = data.volumeInfo.authors;
   this.title = data.volumeInfo.title;
+  this.img_url = data.volumeInfo.imageLinks.thumbnail;
+  this.description = data.volumeInfo.description;
 }
 
 // app.get('/seach', (request, response)=>{
