@@ -11,18 +11,17 @@
     <header><h1>
       Book App
     </h1></header>
-    <form action="/show" method="post">
-      <label>Book Search: <input type="text" name="bookSearch" /> </label>
-      <label>
-        Search by Author:
-        <input type="radio" name="search" value="author" />
-      </label>
-      <label>
-        Search by Title:
-        <input type="radio" name="search" value="title" />
-      </label>
-      <button>Submit</button>
-    </form>
+    <section class="all-books">
+      <ul id="book-list">
+        <% results.forEach(book => { %>
+          <li class="book-item" data-id="<%= book.id %>">
+            <img src="<%= book.img_url %>">
+            <p><%= book.title %></p>
+            <p><%= book.author %></p>
+            <a href="/tasks/<%= task.id %>">View Details</a>
+          </li>
+        <% }) %>
+      </ul>
 
   </body>
 </html>

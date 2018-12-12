@@ -14,9 +14,9 @@ app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 
-// const client = new pg.Client(process.env.DATABASE_URL);
-// client.on('error', error => console.error(error));
-// client.connect();
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', error => console.error(error));
+client.connect();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
@@ -27,13 +27,39 @@ app.get('/', (req, res) => {
   res.render('../views/pages/index');
 });
 
+
 app.get('/new', (req, res) => {
   res.render('../views/pages/searches/new');
 });
 
+app.get('/', getSavedBooks);
 
 app.post('/show', getResults);
 
+function Book(data) {
+  this.selfLink = data.selfLink;
+  if(data.volumeInfo.author){
+    this.author = data.volumeInfo.authors;
+  } else {
+    this.author = 'No Author';
+  }
+  this.title = data.volumeInfo.title;
+  if (data.volumeInfo.imageLinks){
+    this.img_url = data.volumeInfo.imageLinks.thumbnail;
+  } else {
+    this.img_url = 'https://via.placeholder.com/150'
+  }
+  this.description = data.volumeInfo.description;
+  this.ISBN = data.volumeInfo.industryIdentifiers.identifier[1];
+}
+
+function getSavedBooks(request, response){
+  let SQL = 'SELECT * from tasks;';
+
+  return client.query(SQL)
+    .then( results => response.render('index', { results: results.rows }))
+    .catch(err => console.error(err));
+}
 function getResults(request, response) {
   console.log('my request body:', request.body);
   // response.sendfile('../views/pages/searches/show', {root: './public'});
@@ -45,6 +71,7 @@ function getResults(request, response) {
     });
 
 }
+
 let fetchData = (input =>{
   console.log('fetch is running');
   let query = input.bookSearch;
@@ -77,22 +104,6 @@ let fetchData = (input =>{
   });
 });
 
-function Book(data) {
-  this.selfLink = data.selfLink;
-  if(data.volumeInfo.author){
-    this.author = data.volumeInfo.authors;
-  } else {
-    this.author = 'No Author';
-  }
-  this.title = data.volumeInfo.title;
-  if (data.volumeInfo.imageLinks){
-    this.img_url = data.volumeInfo.imageLinks.thumbnail;
-  } else {
-    this.img_url = 'https://via.placeholder.com/150'
-  }
-  this.description = data.volumeInfo.description;
-  this.ISBN = data.volumeInfo.industryIdentifiers.identifier[1];
-}
 
 // app.get('/seach', (request, response)=>{
 //   response.render('show', {newBook: })
@@ -102,6 +113,17 @@ function Book(data) {
 //   console.log('renderBooks');
 //   response.render('show', {newBook: books,});
 // };
+
+//get detailed view
+function getDetails(request, response) {
+  let SQL = 'SELECT * FROM books WHERE id=$;';
+  let values = [request.params.book_id];
+
+  return client.query(SQL, values)
+  .then(result => {
+    return response.render('pages/detail', {book: result.row[0]});
+  })
+}
 app.get('../views/pages/searches/show');
 
 app.listen(PORT, () => {
