@@ -34,6 +34,8 @@ app.get('/new', (req, res) => {
 
 app.get('/', getSavedBooks);
 
+app.post('/details', getDetails);
+
 app.post('/show', getResults);
 
 function Book(data) {
@@ -55,10 +57,9 @@ function Book(data) {
 
 function getSavedBooks(request, response){
   let SQL = 'SELECT * FROM books;';
-  console.log('this function is running');
+
   return client.query(SQL)
     .then( results => {
-      console.log('results!!', results);
       response.render('../views/pages/index', { volumes: results.rows })
     })
     .catch(err => console.error(err));
@@ -119,12 +120,13 @@ let fetchData = (input =>{
 
 //get detailed view
 function getDetails(request, response) {
-  let SQL = 'SELECT * FROM books WHERE id=$;';
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.book_id];
 
   return client.query(SQL, values)
   .then(result => {
-    return response.render('pages/detail', {book: result.row[0]});
+    console.log('result', result);
+    return response.render('/detail', {book: result.row[0]});
   })
 }
 app.get('../views/pages/searches/show');

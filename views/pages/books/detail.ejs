@@ -10,15 +10,13 @@
   <head><h2>Search</h2></head>
   <main>
     <section class="detail-container">
-        <% renderedBooks.forEach( item => { %>
           <section class ="book-item" data-id="<%= book.id">
-            <img src="<%= item.img_url %>">
-            <p>Title: <%= item.title %></p>
-            <p>Author: <%= item.author %></p>
-            <p>Description: <%=item.description %> </p>
-            <p> ISBN: <%= item.ISBN %> </p>
+            <img src="<%= book.img_url %>">
+            <p>Title: <%= book.title %></p>
+            <p>Author: <%= book.author %></p>
+            <p>Description: <%=book.description %> </p>
+            <p> ISBN: <%= book.ISBN %> </p>
           </section>
-        <% }) %>
     </section>
   </main>
   
