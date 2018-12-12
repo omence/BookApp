@@ -38,6 +38,8 @@ app.get('/:id', getDetails);
 
 app.post('/show', getResults);
 
+app.post('/show', addBook);
+
 function Book(data) {
   this.selfLink = data.selfLink;
   if(data.volumeInfo.authors){
@@ -85,7 +87,6 @@ let fetchData = (input =>{
   let titleUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}:intitle=${query}`;
   let authorUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}:inauthor=${query}`;
   let URL = '';
-  console.log('ourURLs', titleUrl, authorUrl);
   if (searchType === 'author'){
     URL = authorUrl;
   } else if (searchType = 'title'){
@@ -98,26 +99,13 @@ let fetchData = (input =>{
 
     const allBooks = result.body.items.map(info => {
       const newBook = new Book(info);
-      console.log('newBook', newBook);
       return newBook;
     });
-    console.log('allBooks', allBooks);
-    // renderBooks(allBooks);
-    // console.log(response);
-    // response.render('show', {newBook, allBooks,});
+ 
     return allBooks;
   });
 });
 
-
-// app.get('/seach', (request, response)=>{
-//   response.render('show', {newBook: })
-// })
-
-// function renderBooks(books){
-//   console.log('renderBooks');
-//   response.render('show', {newBook: books,});
-// };
 
 //get detailed view
 function getDetails(request, response) {
@@ -128,11 +116,24 @@ function getDetails(request, response) {
   return client.query(SQL, values)
   .then(result => {
 
-    console.log('result', result);
     response.render('../views/pages/books/detail', {book: result.rows[0]});
   });
 }
 app.get('../views/pages/searches/show');
+
+
+function addBook(request, response) {
+  console.log('addBook running')
+  let {title, author, isbn, image_ulr} = request.body;
+  let SQL = `INSERT INTO books(title, author, isbn, image_ulr) VALUES ($1, $2, $3, $4,);`;
+  let values = [title, author, isbn, image_ulr];
+
+  return client.query(SQL, values)
+  .then(response.redirect('/'))
+  .catch(err => console.error(err));
+}
+
+
 
 app.listen(PORT, () => {
     console.log(`listening on ${PORT}`);

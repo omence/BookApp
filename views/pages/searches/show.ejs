@@ -18,16 +18,18 @@
             <img src="<%= item.img_url %>">
             <p><%= item.title %></p>
             <p><%= item.author %></p>
-            <button class="api-button <%=item.ISBN %>">Save</button></a>
+            <button class="api-button <%=item.ISBN %>">Add Book</button>
           </section>
-          <section class="save-form hidden blue <%=item.ISBN %>">
-            <form>
+          <section class="save-form hidden blue <%= item.ISBN %>">
+            <form action = '/show' method = 'post'>
               <label>Title: <input type="text" name="title" placeholder="<%= item.title %>"/> </label>
               <label>Author <input type="text" name="author" placeholder="<%= item.author %>"/> </label>
               <label>ISBN <input type="text" name="isbn" placeholder="<%= item.ISBN %>"/> </label>
               <label>Description <input type="text" name="description" placeholder="<%= item.description %>"/> </label>
+              <button type = submit class="api-saveButton <%= item.ISBN %>">Save Book</button>
             </form>
           </section>
+          
         <% }) %>
     </section>
   </main>
