@@ -3,11 +3,10 @@
 <head>
 
   <title>Search</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/Styles/base.css" />
+  <%- include('../../layout/head') %>
 </head>
 <body>
-  <head><h2>Search</h2></head>
+  <%- include('../../layout/header') %>
   <main>
     <section class="detail-container">
           <section class ="book-item" data-id="<%= book.id %>">
@@ -19,6 +18,6 @@
           </section>
     </section>
   </main>
-  
+  <%- include('../../layout/footer') %>
 </body>
 </html>
