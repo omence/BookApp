@@ -9,13 +9,14 @@
 <body>
   <head><h2>Search</h2></head>
   <main>
-    <section>
+    <section class="detail-container">
         <% renderedBooks.forEach( item => { %>
-          <section>
+          <section class ="book-item" data-id="<%= book.id">
             <img src="<%= item.img_url %>">
-            <p><%= item.title %></p>
-            <p><%= item.author %></p>
-            <button>Save</button>
+            <p>Title: <%= item.title %></p>
+            <p>Author: <%= item.author %></p>
+            <p>Description: <%=item.description %> </p>
+            <p> ISBN: <%= item.ISBN %> </p>
           </section>
         <% }) %>
     </section>
