@@ -8,19 +8,16 @@
     <link rel="stylesheet" href="/Styles/base.css" />
   </head>
   <body>
-    <header><h1>
-      Book App
-    </h1></header>
+    <%- include('../layout/header') %>
     <section class="all-books">
         <% volumes.forEach(book => { %>
           <section class="book-item" data-id="<%= book.id %>">
-            <img src="<%= book.img_url %>">
+            <img src="<%= book.img_url %>"/>
             <p><%= book.title %></p>
             <p><%= book.author %></p>
             <a href="/books/details<%book.id %>"> View Details </a>
           </section>
         <% }) %>
         </section>
-
   </body>
 </html>

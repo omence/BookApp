@@ -40,7 +40,7 @@ app.post('/show', getResults);
 
 function Book(data) {
   this.selfLink = data.selfLink;
-  if(data.volumeInfo.author){
+  if(data.volumeInfo.authors){
     this.author = data.volumeInfo.authors;
   } else {
     this.author = 'No Author';
@@ -49,10 +49,11 @@ function Book(data) {
   if (data.volumeInfo.imageLinks){
     this.img_url = data.volumeInfo.imageLinks.thumbnail;
   } else {
-    this.img_url = 'https://via.placeholder.com/150'
+    this.img_url = 'https://via.placeholder.com/150';
   }
   this.description = data.volumeInfo.description;
-  this.ISBN = data.volumeInfo.industryIdentifiers.identifier[1];
+  this.ISBN = data.volumeInfo.industryIdentifiers[0].identifier;
+  this.identNum = 
 }
 
 function getSavedBooks(request, response){
@@ -95,6 +96,7 @@ let fetchData = (input =>{
 
   return superagent.get(URL).then(result => {
     console.log('running');
+
     const allBooks = result.body.items.map(info => {
       const newBook = new Book(info);
       console.log('newBook', newBook);
