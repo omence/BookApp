@@ -23,9 +23,9 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 
 
-app.get('/', (req, res) => {
-  res.render('../views/pages/index');
-});
+// app.get('/', (req, res) => {
+//   res.render('../views/pages/index');
+// });
 
 
 app.get('/new', (req, res) => {
@@ -54,10 +54,13 @@ function Book(data) {
 }
 
 function getSavedBooks(request, response){
-  let SQL = 'SELECT * from tasks;';
-
+  let SQL = 'SELECT * FROM books;';
+  console.log('this function is running');
   return client.query(SQL)
-    .then( results => response.render('index', { results: results.rows }))
+    .then( results => {
+      console.log('results!!', results);
+      response.render('../views/pages/index', { volumes: results.rows })
+    })
     .catch(err => console.error(err));
 }
 function getResults(request, response) {

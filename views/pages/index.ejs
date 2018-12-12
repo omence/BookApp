@@ -12,16 +12,15 @@
       Book App
     </h1></header>
     <section class="all-books">
-      <ul id="book-list">
-        <% results.forEach(book => { %>
-          <li class="book-item" data-id="<%= book.id %>">
+        <% volumes.forEach(book => { %>
+          <section class="book-item" data-id="<%= book.id %>">
             <img src="<%= book.img_url %>">
             <p><%= book.title %></p>
             <p><%= book.author %></p>
-            <a href="/tasks/<%= task.id %>">View Details</a>
-          </li>
+            <a href="/">
+          </section>
         <% }) %>
-      </ul>
+        </section>
 
   </body>
 </html>
