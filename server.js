@@ -53,7 +53,6 @@ function Book(data) {
   }
   this.description = data.volumeInfo.description;
   this.ISBN = data.volumeInfo.industryIdentifiers[0].identifier;
-  this.identNum = 
 }
 
 function getSavedBooks(request, response){
