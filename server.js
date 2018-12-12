@@ -15,9 +15,11 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
 
-//const client = new pg.Client(process.env.DATABASE_URL);
-// client.on('error', error => console.log(error));
-// client.connect();
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', error => console.log(error));
+client.connect();
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
@@ -25,6 +27,18 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => {
   res.render('../views/pages/index');
 });
+
+function getBooks(request, response) {
+  lest SQL = 'SELECT * from books;';
+
+  return client.query(SQL)
+  .then(results => response.render('index', {books: books.rows}))
+  .catch(err => console.error(err));
+  
+}
+
+
+
 
 
 app.post('/search', getResults);
@@ -73,8 +87,8 @@ function Book(data) {
   this.title = data.volumeInfo.title;
 }
 
-// app.get('/seach', (request, response)=>{
-//   response.render('show', {newBook: })
+// app.get('/seach', (response)=>{
+//   response.render('show', {newBook: allBooks })
 // })
 
 // function renderBooks(books){
