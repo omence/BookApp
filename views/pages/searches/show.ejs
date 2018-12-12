@@ -5,21 +5,35 @@
   <title>Search</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/Styles/base.css" />
+  <link rel="stylesheet" href="/Styles/modules/save-book.css"/>
 </head>
 <body>
   <head><h2>Search</h2></head>
   <main>
-    <section>
+    <section class ="all-api-books" id ="test">
         <% renderedBooks.forEach( item => { %>
-          <section>
+          <% let num = 0 %>
+          <% num++ %>
+          <section class ="api-book">
             <img src="<%= item.img_url %>">
             <p><%= item.title %></p>
             <p><%= item.author %></p>
-            <button>Save</button>
+            <button class="api-button <%=item.ISBN %>">Save</button></a>
+          </section>
+          <section class="save-form hidden blue <%=item.ISBN %>">
+            <form>
+              <label>Title: <input type="text" name="title" placeholder="<%= item.title %>"/> </label>
+              <label>Author <input type="text" name="author" placeholder="<%= item.author %>"/> </label>
+              <label>ISBN <input type="text" name="isbn" placeholder="<%= item.ISBN %>"/> </label>
+              <label>Description <input type="text" name="description" placeholder="<%= item.description %>"/> </label>
+            </form>
           </section>
         <% }) %>
     </section>
   </main>
-  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>
