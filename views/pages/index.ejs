@@ -17,7 +17,7 @@
             <img src="<%= book.img_url %>">
             <p><%= book.title %></p>
             <p><%= book.author %></p>
-            <a href="/books/details<%book.id %>"> View Details </a>
+            <a href="/<%= book.id %>"> View Details </a>
           </section>
         <% }) %>
         </section>
