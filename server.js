@@ -27,6 +27,10 @@ app.get('/', (req, res) => {
   res.render('../views/pages/index');
 });
 
+app.get('/new', (req, res) => {
+  res.render('../views/pages/searches/new');
+});
+
 
 app.post('/show', getResults);
 
@@ -75,10 +79,19 @@ let fetchData = (input =>{
 
 function Book(data) {
   this.selfLink = data.selfLink;
-  this.author = data.volumeInfo.authors;
+  if(data.volumeInfo.author){
+    this.author = data.volumeInfo.authors;
+  } else {
+    this.author = 'No Author';
+  }
   this.title = data.volumeInfo.title;
-  this.img_url = data.volumeInfo.imageLinks.thumbnail;
+  if (data.volumeInfo.imageLinks){
+    this.img_url = data.volumeInfo.imageLinks.thumbnail;
+  } else {
+    this.img_url = 'https://via.placeholder.com/150'
+  }
   this.description = data.volumeInfo.description;
+  this.ISBN = data.volumeInfo.industryIdentifiers.identifier[1];
 }
 
 // app.get('/seach', (request, response)=>{

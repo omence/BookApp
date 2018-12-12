@@ -1,0 +1,28 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Book App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/Styles/base.css" />
+  </head>
+  <body>
+    <header><h1>
+      Book App
+    </h1></header>
+    <form action="/show" method="post">
+      <label>Book Search: <input type="text" name="bookSearch" /> </label>
+      <label>
+        Search by Author:
+        <input type="radio" name="search" value="author" />
+      </label>
+      <label>
+        Search by Title:
+        <input type="radio" name="search" value="title" />
+      </label>
+      <button>Submit</button>
+    </form>
+
+  </body>
+</html>
