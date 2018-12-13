@@ -17,6 +17,7 @@
             <p> ISBN: <%= book.isbn %> </p>
           </section>
     </section>
+    <%- include('edit', {formAction: 'update', item: book}) %>
   </main>
   <%- include('../../layout/footer') %>
 </body>
