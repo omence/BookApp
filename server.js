@@ -38,7 +38,7 @@ app.get('/:id', getDetails);
 
 app.post('/show', getResults);
 
-app.post('/show', addBook);
+app.post('/save', addBook);
 
 function Book(data) {
   this.selfLink = data.selfLink;
@@ -120,13 +120,14 @@ function getDetails(request, response) {
   });
 }
 app.get('../views/pages/searches/show');
+app.get('../views/pages/searches/save');
 
 
 function addBook(request, response) {
-  console.log('addBook running')
-  let {title, author, isbn, image_ulr} = request.body;
-  let SQL = `INSERT INTO books(title, author, isbn, image_ulr) VALUES ($1, $2, $3, $4,);`;
-  let values = [title, author, isbn, image_ulr];
+  console.log('addBook running');
+  let {title, author, isbn, img_url} = request.body;
+  let SQL = `INSERT INTO books(title, author, isbn, image_url) VALUES ($1, $2, $3, $4);`;
+  let values = [title, author, isbn, img_url];
 
   return client.query(SQL, values)
   .then(response.redirect('/'))
