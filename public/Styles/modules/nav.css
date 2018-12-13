@@ -33,6 +33,7 @@ a{
   display: flex;
   justify-content: center;
   flex-flow: column;
+  margin: 0px;
 }
 
 .bar{

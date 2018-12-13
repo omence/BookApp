@@ -15,9 +15,12 @@
             <p>Author: <%= book.author %></p>
             <p>Description: <%= book.description %> </p>
             <p> ISBN: <%= book.isbn %> </p>
+            <button class="edit-button">Edit Book</button>
           </section>
     </section>
-    <%- include('edit', {formAction: 'update', item: book}) %>
+    <section class="db-form detail-hide">
+      <%- include('edit', {formAction: 'update', item: book}) %>
+    </section>
   </main>
   <%- include('../../layout/footer') %>
 </body>

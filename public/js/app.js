@@ -12,3 +12,8 @@ $('.hamburger').on('click', event => {
   console.log('other button pressed');
   $('.navi-holder').toggleClass('nav-hide');
 })
+
+$('.edit-button').on('click', event => {
+  console.log('other button pressed');
+  $('.db-form').toggleClass('detail-hide');
+})
