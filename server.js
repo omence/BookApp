@@ -49,12 +49,12 @@ function Book(data) {
   }
   this.title = data.volumeInfo.title;
   if (data.volumeInfo.imageLinks){
-    this.img_url = data.volumeInfo.imageLinks.thumbnail;
+    this.image_url = data.volumeInfo.imageLinks.thumbnail;
   } else {
-    this.img_url = 'https://via.placeholder.com/150';
+    this.image_url = 'https://via.placeholder.com/150';
   }
   this.description = data.volumeInfo.description;
-  this.ISBN = data.volumeInfo.industryIdentifiers[0].identifier;
+  this.isbn = data.volumeInfo.industryIdentifiers[0].identifier;
 }
 
 function getSavedBooks(request, response){
@@ -125,9 +125,9 @@ app.get('../views/pages/searches/save');
 
 function addBook(request, response) {
   console.log('addBook running');
-  let {title, author, isbn, img_url} = request.body;
+  let {title, author, isbn, image_url} = request.body;
   let SQL = `INSERT INTO books(title, author, isbn, image_url) VALUES ($1, $2, $3, $4);`;
-  let values = [title, author, isbn, img_url];
+  let values = [title, author, isbn, image_url];
 
   return client.query(SQL, values)
   .then(response.redirect('/'))
