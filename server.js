@@ -51,7 +51,7 @@ app.post('/show', getResults);
 
 app.post('/save', addBook);
 
-app.put('/update', updateBook);
+app.put('/update/:id', updateBook);
 
 app.delete('/delete', deleteBook);
 
@@ -152,11 +152,14 @@ function addBook(request, response) {
 }
 
 function updateBook(request, response){
+  console.log('update book started');
   let {title, author, isbn, image_url, description} = request.body;
   let SQL =`UPDATE books SET title = $1, author = $2, isbn = $3, image_url = $4, description = $5 WHERE id = $6;`;
   let values = [title, author, isbn, image_url, description, request.params.id];
+  console.log('client query', client.query);
   client.query(SQL, values)
-    .then(response.redirect(`/:id${request.params.id}`));
+    .then(response.redirect(`/${request.params.id}`))
+    .catch(err => console.error(err));
 
 };
 
