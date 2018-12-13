@@ -4,7 +4,7 @@
 
 .detail-container .book-item{
   height: 100%;
-  padding: 10px;
+  padding: 10%;
 }
 
 .details-buttons{
@@ -15,5 +15,8 @@
 
 .details-buttons button{
   margin: 0px;
-  width: 12vw;
+  width: 20vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

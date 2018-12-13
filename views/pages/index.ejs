@@ -8,6 +8,7 @@
   <body>
     <%- include('../layout/header') %>
     <main>
+      <h2> Saved Books</h2>
       <section class="all-books">
         <% volumes.forEach(book => { %>
           <section class="book-item" data-id="<%= book.id %>">
