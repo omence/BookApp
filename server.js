@@ -5,6 +5,7 @@ const ejs = require('ejs');
 const superagent = require('superagent');
 const cors = require('cors');
 const pg = require('pg');
+const methodOverride = require('method-override');
 require('dotenv').config();
 const app = express();
 
@@ -13,6 +14,13 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
+app.use(methodOverride((request, response) => {
+  if (request.body && typeof request.body === 'object' && '_method' in request.body) {
+    let method = request.body._method;
+    delete request.body._method;
+    return method;
+  }
+}));
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', error => console.error(error));
@@ -39,6 +47,10 @@ app.get('/:id', getDetails);
 app.post('/show', getResults);
 
 app.post('/save', addBook);
+
+app.put('/update', updateBook);
+
+app.delete('/delete', deleteBook);
 
 function Book(data) {
   this.selfLink = data.selfLink;
@@ -73,7 +85,7 @@ function getResults(request, response) {
   fetchData(input)
     .then(result => {
       console.log(result);
-      response.render('pages/searches/show', {renderedBooks: result,})
+      response.render('pages/searches/show', {renderedBooks: result,});
     });
 
 }
@@ -121,6 +133,8 @@ function getDetails(request, response) {
 }
 app.get('../views/pages/searches/show');
 app.get('../views/pages/searches/save');
+app.get('../views/pages/searches/update');
+app.get('../views/pages/searches/delete');
 
 
 function addBook(request, response) {
@@ -130,12 +144,29 @@ function addBook(request, response) {
   let values = [title, author, isbn, image_url];
 
   return client.query(SQL, values)
-  .then(response.redirect('/'))
-  .catch(err => console.error(err));
+    .then(response.redirect('/'))
+    .catch(err => console.error(err));
 }
+
+function updateBook(request, response){
+  let {title, author, isbn, image_url} = request.body;
+  let SQL =`UPDATE books SET title = $1, author = $2, isbn = $3, image_url = $4 WHERE id = $5;`;
+  let values = [title, author, isbn, image_url, request.params.id];
+  client.query(SQL, values)
+    .then(response.redirect(`'/:id'${request.params.id}`));
+
+};
+
+function deleteBook(request, response){
+  let {title, author, isbn, image_url} = request.body;
+  let SQL =`DELETE FROM books SET title = $1, author = $2, isbn = $3, image_url = $4 WHERE id = $5;`;
+  let values = [title, author, isbn, image_url, request.params.id];
+  client.query(SQL, values)
+    .then(response.redirect('/'));
+};
 
 
 
 app.listen(PORT, () => {
-    console.log(`listening on ${PORT}`);
-  });
+  console.log(`listening on ${PORT}`);
+});
