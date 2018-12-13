@@ -21,14 +21,15 @@
             <button class="api-button <%=item.isbn %>">Add Book</button>
           </section>
           <section class="save-form hidden blue <%= item.isbn %>">
-            <form action = '/save' method = 'post'>
+              <%- include('../books/edit', {formAction: 'save', item: item}) %>
+            <!-- <form action = '/save' method = 'post'>
               <label>Title: <input type="text" name="title" value="<%= item.title %>" placeholder="<%= item.title %>"/> </label>
               <label>Author <input type="text" name="author" value="<%= item.author %>" placeholder="<%= item.author %>"/> </label>
               <label>ISBN <input type="text" name="isbn" value="<%= item.isbn %>" placeholder="<%= item.isbn %>"/> </label>
               <label>Description <input type="text" name="description"value="<%= item.description %>" placeholder="<%= item.description %>"/> </label>
               <label><input type="hidden" name="image_url" value="<%= item.image_url %>" ></label>
               <button type = submit class="api-saveButton <%= item.isbn %>">Save Book</button>
-            </form>
+            </form> -->
           </section>
           
         <% }) %>
