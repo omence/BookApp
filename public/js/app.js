@@ -7,3 +7,8 @@ $('.api-button').on('click', event => {
 
 });
 
+
+$('section .hamburger').on('click', event => {
+  console.log('other button pressed');
+  $('nav').toggleClass('nav-hide');
+})
