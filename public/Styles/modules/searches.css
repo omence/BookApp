@@ -1,0 +1,15 @@
+.searches{
+  height: 1000px;
+}
+
+.searches button {
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 40%;
+  margin-top: 10px;
+}
+
+.search-form label{
+  display: flex;
+  justify-content: space-between;
+}
