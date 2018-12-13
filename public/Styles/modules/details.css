@@ -2,6 +2,18 @@
   display: none;
 }
 
-.db-form {
-  
+.detail-container .book-item{
+  height: 100%;
+  padding: 10px;
+}
+
+.details-buttons{
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row;
+}
+
+.details-buttons button{
+  margin: 0px;
+  width: 12vw;
 }

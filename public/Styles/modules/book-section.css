@@ -4,9 +4,12 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 400px;
+  padding: 5%;
+  height: 100%;
+}
+
+.book-item .api-book {
+  height: 100%;
 }
 
 .book-item img {
@@ -28,7 +31,6 @@
   margin-right: 30%;
 }
 p {
-  font-family: sans-serif;
   padding-top: 10px;
   padding-bottom: 10px;
 }

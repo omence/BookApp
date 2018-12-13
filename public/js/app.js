@@ -11,6 +11,7 @@ $('.api-button').on('click', event => {
 $('.hamburger').on('click', event => {
   console.log('other button pressed');
   $('.navi-holder').toggleClass('nav-hide');
+  $('main').toggleClass('shift-down');
 })
 
 $('.edit-button').on('click', event => {

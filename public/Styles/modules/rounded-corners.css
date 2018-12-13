@@ -1,0 +1,8 @@
+section, form {
+  border-radius: 10px;
+}
+
+section .db-form, section .save-form{
+  border-radius: 0px;
+}
+
