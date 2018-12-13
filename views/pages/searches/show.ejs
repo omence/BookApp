@@ -15,18 +15,19 @@
           <% let num = 0 %>
           <% num++ %>
           <section class ="api-book">
-            <img src="<%= item.img_url %>">
+            <img src="<%= item.image_url %>">
             <p><%= item.title %></p>
             <p><%= item.author %></p>
-            <button class="api-button <%=item.ISBN %>">Add Book</button>
+            <button class="api-button <%=item.isbn %>">Add Book</button>
           </section>
-          <section class="save-form hidden blue <%= item.ISBN %>">
+          <section class="save-form hidden blue <%= item.isbn %>">
             <form action = '/save' method = 'post'>
               <label>Title: <input type="text" name="title" value="<%= item.title %>" placeholder="<%= item.title %>"/> </label>
               <label>Author <input type="text" name="author" value="<%= item.author %>" placeholder="<%= item.author %>"/> </label>
-              <label>ISBN <input type="text" name="isbn" value="<%= item.ISBN %>" placeholder="<%= item.ISBN %>"/> </label>
+              <label>ISBN <input type="text" name="isbn" value="<%= item.isbn %>" placeholder="<%= item.isbn %>"/> </label>
               <label>Description <input type="text" name="description"value="<%= item.description %>" placeholder="<%= item.description %>"/> </label>
-              <button type = submit class="api-saveButton <%= item.ISBN %>">Save Book</button>
+              <label><input type="hidden" name="image_url" value="<%= item.image_url %>" ></label>
+              <button type = submit class="api-saveButton <%= item.isbn %>">Save Book</button>
             </form>
           </section>
           
