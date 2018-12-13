@@ -1,16 +1,19 @@
-body{
-    background-color: lightgray;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+h1 {
+    font-size: 2em;
+    font-family: sans-serif;
 }
-form {
-    font-size: 20px;
+body {
+}
+header {
+    background-color: black;
+    color: white;
+}
+
+main {
+    background-color: grey;
 }
 
 footer {
     background-color: black;
-    height: 50px;
-    position: fixed;
-    bottom: 0px;
+    color: white;
 }

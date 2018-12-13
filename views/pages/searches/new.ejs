@@ -6,18 +6,20 @@
   </head>
   <body>
     <%- include('../../layout/header') %>
-    <form action="/show" method="post">
-      <label>Book Search: <input type="text" name="bookSearch" /> </label>
-      <label>
-        Search by Author:
-        <input type="radio" name="search" value="author" />
-      </label>
-      <label>
-        Search by Title:
-        <input type="radio" name="search" value="title" />
-      </label>
-      <button>Submit</button>
-    </form>
+    <main>
+      <form action="/show" method="post">
+        <label>Book Search: <input type="text" name="bookSearch" /> </label>
+        <label>
+          Search by Author:
+          <input type="radio" name="search" value="author" />
+        </label>
+        <label>
+          Search by Title:
+          <input type="radio" name="search" value="title" />
+        </label>
+        <button>Submit</button>
+      </form>
+    </main>
     <%- include('../../layout/footer') %>
   </body>
 </html>

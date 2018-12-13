@@ -1,0 +1,28 @@
+body{
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header {
+  position: fixed;
+  top: 0px;
+  height: 50px;
+  width: 100%;
+  left: 0px;
+  right: 0px;
+}
+
+main {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+footer {
+  position: fixed;
+  bottom: 0px;
+  height: 50px;
+  width: 100%;
+}
+
