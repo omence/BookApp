@@ -9,6 +9,9 @@
     <main>
       <section class="all-books">
         <% volumes.forEach(book => { %>
+          <form action = "/delete/<%= book.id %>" method = "post">
+            <button type = "submit">Delete Book</button>
+            </form>
           <section class="book-item" data-id="<%= book.id %>">
             <img src= "<%= book.image_url %>" />
             <p class="title"><%= book.title %></p>

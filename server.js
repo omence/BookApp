@@ -53,7 +53,7 @@ app.post('/save', addBook);
 
 app.put('/update/:id', updateBook);
 
-app.delete('/delete', deleteBook);
+app.post('/delete/:id', deleteBook);
 
 function Book(data) {
   this.selfLink = data.selfLink;
@@ -129,10 +129,10 @@ function getDetails(request, response) {
   let values = [request.params.id];
 
   return client.query(SQL, values)
-  .then(result => {
+    .then(result => {
 
-    response.render('../views/pages/books/detail', {book: result.rows[0]});
-  });
+      response.render('../views/pages/books/detail', {book: result.rows[0]});
+    });
 }
 app.get('../views/pages/searches/show');
 app.get('../views/pages/searches/save');
@@ -164,9 +164,9 @@ function updateBook(request, response){
 };
 
 function deleteBook(request, response){
-  let {title, author, isbn, image_url, description} = request.body;
-  let SQL =`DELETE FROM books SET title = $1, author = $2, isbn = $3, image_url = $4 description = $ 5 WHERE id = $6;`;
-  let values = [title, author, isbn, image_url, description, request.params.id];
+  console.log('delete running');
+  let SQL =`DELETE FROM books WHERE id = $1;`;
+  let values = [request.params.id];
   client.query(SQL, values)
     .then(response.redirect('/'));
 };
