@@ -6,17 +6,19 @@
   </head>
   <body>
     <%- include('../layout/header') %>
-    <section class="all-books">
+    <main>
+      <section class="all-books">
         <% volumes.forEach(book => { %>
           <section class="book-item" data-id="<%= book.id %>">
-            <img src= "<%= book.image_url %>"" />
-            <p><%= book.title %></p>
-            <p><%= book.author %></p>
+            <img src= "<%= book.image_url %>" />
+            <p class="title"><%= book.title %></p>
+            <p class="author"><%= book.author %></p>
             <a href="/<%= book.id %>"> View Details </a>
           </section>
         <% }) %>
         </section>
-      <%- include('../layout/footer') %>
+    </main>
+    <%- include('../layout/footer') %>
   </body>
 
 </html>

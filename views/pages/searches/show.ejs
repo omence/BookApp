@@ -14,10 +14,10 @@
         <% renderedBooks.forEach( item => { %>
           <% let num = 0 %>
           <% num++ %>
-          <section class ="api-book">
+          <section class ="api-book book-item">
             <img src="<%= item.image_url %>">
-            <p><%= item.title %></p>
-            <p><%= item.author %></p>
+            <p class="title"><%= item.title %></p>
+            <p class="author"><%= item.author %></p>
             <button class="api-button <%=item.isbn %>">Add Book</button>
           </section>
           <section class="save-form hidden blue <%= item.isbn %>">
