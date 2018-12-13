@@ -11,19 +11,28 @@ nav{
 }
 
 a{
+  display: block;
   font-family: sans-serif;
   color: white;
   text-decoration: none;
+  text-align: center;
 }
 
 .nav-hide {
-  display: hidden;
+  display: none;
 }
 
 .hamburger{
   position: absolute;
   right: 5%;
   top: 10px;
+  height: 30px;
+  width: 30px;
+  background-color: black;
+  border: none;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
 }
 
 .bar{
@@ -31,4 +40,5 @@ a{
   width: 24px;
   height: 4px;
   margin-bottom: 5px;
+  margin-left: 0px;
 }
