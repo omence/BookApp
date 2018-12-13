@@ -16,12 +16,13 @@
           <% num++ %>
           <section class ="api-book book-item">
             <img src="<%= item.image_url %>">
-            <p class="title"><%= item.title %></p>
+            <h3 class="title"><%= item.title %></h3>
             <p class="author"><%= item.author %></p>
-            <button class="api-button <%=item.isbn %>">Add Book</button>
-          </section>
-          <section class="save-form hidden blue <%= item.isbn %>">
-              <%- include('../books/edit', {formAction: 'save', item: item}) %>
+            <p class="description"><%= item.description %></p>
+            <button class="api-button"> Add Book</button>
+            <section class="save-form hidden form-container <%= item.isbn %>">
+                <%- include('../books/edit', {formAction: 'save', item: item}) %>
+            </section>
           </section>
           
         <% }) %>
