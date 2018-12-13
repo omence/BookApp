@@ -21,7 +21,7 @@
             <button class="api-button <%=item.ISBN %>">Add Book</button>
           </section>
           <section class="save-form hidden blue <%= item.ISBN %>">
-            <form action = '/show' method = 'post'>
+            <form action = '/save' method = 'post'>
               <label>Title: <input type="text" name="title" placeholder="<%= item.title %>"/> </label>
               <label>Author <input type="text" name="author" placeholder="<%= item.author %>"/> </label>
               <label>ISBN <input type="text" name="isbn" placeholder="<%= item.ISBN %>"/> </label>
