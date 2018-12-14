@@ -34,10 +34,6 @@ client.connect();
 app.set('view engine', 'ejs');
 
 
-// app.get('/', (req, res) => {
-//   res.render('../views/pages/index');
-// });
-
 
 app.get('/new', (req, res) => {
   res.render('../views/pages/searches/new');
@@ -134,10 +130,6 @@ function getDetails(request, response) {
       response.render('../views/pages/books/detail', {book: result.rows[0]});
     });
 }
-app.get('../views/pages/searches/show');
-app.get('../views/pages/searches/save');
-app.get('../views/pages/searches/update');
-app.get('../views/pages/searches/delete');
 
 
 function addBook(request, response) {
